@@ -108,9 +108,8 @@ Core.Entity.prototype = {
 	
 	move: function(x, y) {
 		var map = this.getMap();
-		var tile = map.getTile(this.getX() + x, this.getY() + y);
 
-		if (tile.isWalkable()) {
+		if (map.isOpenCell(this.getX() + x, this.getY() + y)) {
 			var oldPosition = this.getPosition();
 			
 			this.setPosition(this.getX() + x, this.getY() + y);
