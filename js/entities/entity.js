@@ -46,6 +46,10 @@ Core.Entity = function(properties) {
 }
 
 Core.Entity.prototype = {
+	getName: function() {
+		return this._name;
+	},
+	
 	getMap: function() {
 		return this._map;
 	},
@@ -114,7 +118,11 @@ Core.Entity.prototype = {
 			if (this.getMap()) {
 				this.getMap().updateEntityPosition(this, oldPosition.x, oldPosition.y);
 			}
+			
+			return true;
 		}
+		
+		return false;
 	},
 	
 	hasComponent: function(componentType) {

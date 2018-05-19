@@ -1,7 +1,7 @@
 Core.Game = function(options) {
 	options = options || {};
 	
-	this._scheduler = new ROT.Scheduler.Simple();
+	this._scheduler = new ROT.Scheduler.Speed();
 	this._engine = new ROT.Engine(this._scheduler);
 }
 
@@ -22,7 +22,13 @@ Core.Game.prototype = {
 		return this._scheduler;
 	},
 	
-	init: function() {	
+	getEnded: function() {
+		return this._ended;
+	},
+	
+	init: function() {
+		this._ended = false;
+		
 		this._map = new Core.Map({
 			width: Core.getWidth() * 2,
 			height: Core.getHeight() * 2,
@@ -73,8 +79,18 @@ Core.Game.prototype = {
 		});
 		
 		this._player = Core.EntityFactory.createPlayer();
-		this._player.setPosition(this.getMap().getRandomOpenCell());
-		
+		this._player.setPosition(this.getMap().getRandomOpenCell());		
 		this.getMap().addEntity(this.getPlayer());
+		
+		var goblin = Core.EntityFactory.createGoblin();
+		goblin.setPosition(this.getMap().getRandomOpenCell());
+		this.getMap().addEntity(goblin);
+	},
+	
+	end: function() {
+		this._ended = true;
+		
+		this.getEngine().lock();
+		Core.refresh();
 	}
 }

@@ -59,29 +59,45 @@ Core.Screens.playScreen = {
 				}
 			}
 		}
+		
+		if (Core.getGame().getEnded()) {
+			var gameOverText = [ 'You have died', 'Press any key to continue' ]
+			var y = Math.floor(Core.getHeight() / 2) - Math.floor(gameOverText.length / 2);
+			
+			for (var i = 0; i < gameOverText.length; i++) {
+				display.drawText(Core.getWidth() / 2 - gameOverText[i].length / 2, y++, '%c{white}%b{red}' + gameOverText[i]);	
+			}
+		}
 	},
 	
 	handleInput: function(inputType, inputData) {
 		if (inputType === 'keydown') {
+			if (Core.getGame().getEnded()) {
+				Core.setScreen(Core.Screens.mainMenuScreen);
+			}
+			
 			var player = Core.getGame().getPlayer();
+			var didAct = false;
 			
 			if (inputData.keyCode === ROT.VK_ESCAPE) {
 				Core.setScreen(Core.Screens.mainMenuScreen);				
 			}
 			else if (inputData.keyCode === ROT.VK_LEFT) {
-				player.move(-1, 0);
+				didAct = player.move(-1, 0);
 			}
 			else if (inputData.keyCode === ROT.VK_RIGHT) {
-				player.move(1, 0);
+				didAct = player.move(1, 0);
 			}
 			else if (inputData.keyCode === ROT.VK_UP) {
-				player.move(0, -1);
+				didAct = player.move(0, -1);
 			}
 			else if (inputData.keyCode === ROT.VK_DOWN) {
-				player.move(0, 1);
+				didAct = player.move(0, 1);
 			}
 			
-			Core.getGame().getEngine().unlock();
+			if (didAct) {
+				Core.getGame().getEngine().unlock();
+			}
 		}
 	}
 }
