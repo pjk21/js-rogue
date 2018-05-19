@@ -20,10 +20,14 @@ Core.EntityFactory = {
 			
 			glyph: '@',
 			
+			strength: 5,
+			toughness: 1,
 			sightRadius: 6,
 			
 			components: [
 				Core.Components.PlayerController,
+				Core.Components.Health,
+				Core.Components.Combat,
 				Core.Components.Sight
 			]
 		})
@@ -37,6 +41,8 @@ Core.EntityFactory = {
 			colour: 'green',
 			
 			speed: 50,
+			strength: 4,
+			toughness: 0,
 			sightRadius: 3,
 			
 			tasks: [
@@ -46,6 +52,8 @@ Core.EntityFactory = {
 			
 			components: [
 				Core.Components.AiController,
+				Core.Components.Health,
+				Core.Components.Combat,
 				Core.Components.Sight
 			]
 		})

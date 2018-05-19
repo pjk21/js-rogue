@@ -82,9 +82,11 @@ Core.Game.prototype = {
 		this._player.setPosition(this.getMap().getRandomOpenCell());		
 		this.getMap().addEntity(this.getPlayer());
 		
-		var goblin = Core.EntityFactory.createGoblin();
-		goblin.setPosition(this.getMap().getRandomOpenCell());
-		this.getMap().addEntity(goblin);
+		for (var i = 0; i < 20; i++) {
+			var goblin = Core.EntityFactory.createGoblin();
+			goblin.setPosition(this.getMap().getRandomOpenCell());
+			this.getMap().addEntity(goblin);
+		}
 	},
 	
 	end: function() {

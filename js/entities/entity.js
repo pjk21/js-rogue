@@ -108,8 +108,15 @@ Core.Entity.prototype = {
 	
 	move: function(x, y) {
 		var map = this.getMap();
-
-		if (map.isOpenCell(this.getX() + x, this.getY() + y)) {
+		var target = map.getEntityAt(this.getX() + x, this.getY() + y);
+		
+		if (target) {
+			if (target.hasComponent(Core.Components.Combat) && (this.hasComponent(Core.Components.PlayerController) || target.hasComponent(Core.Components.PlayerController))) {
+				this.attack(target);
+				return true;
+			}
+		}
+		else if (map.isOpenCell(this.getX() + x, this.getY() + y)) {
 			var oldPosition = this.getPosition();
 			
 			this.setPosition(this.getX() + x, this.getY() + y);

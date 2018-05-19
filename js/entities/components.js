@@ -6,6 +6,12 @@ Core.Components.PlayerController = {
 		return this._speed;
 	},
 	
+	listeners: {
+		onDeath: function(attacker) {
+			Core.getGame().end();
+		}
+	},
+	
 	init: function(properties) {
 		this._speed = properties['speed'] || 100;
 	},
@@ -20,12 +26,6 @@ Core.Components.PlayerController = {
 		
 		Core.getGame().getEngine().lock();
 		this._acting = false;
-	},
-	
-	listeners: {
-		onDeath: function(attacker) {
-			Core.getGame().end();
-		}
 	}
 }
 
@@ -35,6 +35,12 @@ Core.Components.AiController = {
 	
 	getSpeed: function() {
 		return this._speed;
+	},
+	
+	listeners: {
+		onDeath: function(attacker) {
+			this.getMap().removeEntity(this);
+		}
 	},
 	
 	init: function(properties) {
@@ -97,14 +103,45 @@ Core.Components.Health = {
 		this._restingHealRate = properties['restingHealRate'] || 0;
 	},
 	
-	listeners: {
-		onDamage: function(attacker, damage) {
-			this._hp -= damage;
+	damage: function(attacker, damage) {
+		this._hp -= damage;
+		this.raiseEvent('onDamage', attacker, damage);
+		console.log(this.getName() + ' is hit by ' + attacker.getName() + '  for ' + damage + ' damage! ' + this._hp + '/' + this._maxHp);
+		
+		if (this._hp <= 0) {
+			this.raiseEvent('onDeath', attacker);
+			attacker.raiseEvent('onKill', this);
+		}
+	},
+	
+	heal: function(amount) {
+		this._hp = Math.min(this._hp + amount, this._maxHp);
+	}
+}
+
+Core.Components.Combat = {
+	name: 'Combat',
+	
+	getStrength: function() {
+		return this._strength;
+	},
+	
+	getToughness: function() {
+		return this._toughness;
+	},
+	
+	init: function(properties) {
+		this._strength = properties['strength'] || 1;
+		this._toughness = properties['toughness'] || 1;
+	},
+	
+	attack: function(target) {
+		if (target.hasComponent(Core.Components.Combat)) {
+			var attack = this.getStrength();
+			var defense = target.getToughness();
+			var damage = 1 + Math.floor(Math.random() * Math.max(0, attack - defense));
 			
-			if (this._hp <= 0) {
-				this.raiseEvent('onDeath', attacker);
-				attacker.raiseEvent('onKill', this);
-			}
+			target.damage(this, damage);
 		}
 	}
 }
