@@ -139,7 +139,7 @@ Core.Map.prototype = {
 		}
 		
 		if (entity.hasComponent('Controller')) {
-			Core.getGame().getScheduler.remove(entity);
+			Core.getGame().getScheduler().remove(entity);
 		}
 	},
 	
