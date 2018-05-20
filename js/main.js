@@ -49,6 +49,8 @@ var Core = {
 		
 		bindEventToScreen('keydown');
 		bindEventToScreen('keypress');
+		
+		this.MessageLog.init();
 	},
 	
 	setScreen: function(screen) {
@@ -96,7 +98,7 @@ window.onload = function() {
 		var container = Core.getDisplay().getContainer();
 		container.setAttribute("id", "gameCanvas");
 		
-		document.getElementById("game").append(container);
+		document.getElementById("game").prepend(container);
 		
 		Core.setScreen(Core.Screens.mainMenuScreen);
 	}

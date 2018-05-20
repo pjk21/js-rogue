@@ -8,6 +8,7 @@
 		<script src="js/rot.js"></script>
 		<script src="js/main.js"></script>
 		<script src="js/game.js"></script>
+		<script src="js/messageLog.js"></script>
 		
 		<script src="js/maps/map.js"></script>
 		<script src="js/maps/tile.js"></script>
@@ -27,17 +28,74 @@
 				margin-top: 20px;
 			}
 		
+			#game {
+				display: table;
+				margin: auto;
+				width: 720px;
+			}
+		
 			#gameCanvas {
 				display: block;
 				margin: auto;
+				outline: 1px solid #9BADB7;
+			}
+			
+			#messageLogHeader {
+				background-color: #9BADB7;
+				padding: 0px 0px 0px 10px;
+				font-variant: small-caps;
+				font-size: 20px;
+				font-weight: bold;
+				height: 32px;
+				line-height: 32px;
 				outline: 1px solid dimGray;
+				margin-top: 10px;
+			}
+			
+			#messageLogHeaderToggle {
+				padding: 0px 3px;
+				background-color: white;
+				float: right;
+			}
+			
+			#messageLogContent {
+				overflow-y: scroll;
+				height: 180px;
+				margin: 0;
+				padding: 0 5px;
+				list-style-position: inside;
+				background-color: #222034;
+				outline: 1px solid dimGray;
+			}
+			
+			#messageLogContent li {
+				margin: 5px;
+				color: white;
+				font-size: 12pt;
+			}
+			
+			.collapsed {
+				display: none;
+				overflow: collapse;
 			}
 		</style>
 	</head>
 	
 	<body>
 		<div id="game">
-		
+
+		<div id="messageLog">
+			<div id="messageLogHeader">
+				Message Log
+				
+				<a href="#" onClick="Core.MessageLog.clear()">X</a>
+				<a id="messageLogHeaderToggle" href="#" onClick="Core.MessageLog.toggle()">+</a>
+			</div>
+			
+			<ul id="messageLogContent">
+
+			</ul>
 		</div>
+	</div>
 	</body>
 </html>

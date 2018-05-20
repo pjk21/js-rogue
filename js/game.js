@@ -29,6 +29,9 @@ Core.Game.prototype = {
 	init: function() {
 		this._ended = false;
 		
+		Core.MessageLog.clear();
+		Core.MessageLog.show();
+		
 		this._map = new Core.Map({
 			width: Core.getWidth() * 2,
 			height: Core.getHeight() * 2,
