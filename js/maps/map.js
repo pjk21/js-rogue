@@ -12,7 +12,7 @@ Core.Map = function(properties) {
 	
 	this._fov = new ROT.FOV.DiscreteShadowcasting(function(x, y) {
 		return map.getTile(x, y).isTransparent();
-	});
+	}, { topology: 4 });
 	
 	this._entities = {};
 }
