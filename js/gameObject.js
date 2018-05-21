@@ -3,6 +3,9 @@ Core.GameObject = function(properties) {
 	
 	Core.Object.call(this, properties);
 	
+	this._x = properties.x || 0;
+	this._y = properties.y || 0;
+	
 	this._components = {};
 	this._componentGroups = {};
 	this._listeners = {};
@@ -41,6 +44,37 @@ Core.GameObject = function(properties) {
 Core.GameObject.extend(Core.Object);
 
 Object.assign(Core.GameObject.prototype, {
+	getX: function() {
+		return this._x;
+	},
+	
+	setX: function(x) {
+		this._x = x;
+	},
+
+	getY: function() {
+		return this._y;
+	},
+	
+	setY: function(y) {
+		this._y = y;
+	},
+	
+	getPosition: function() {
+		return { x: this.getX(), y: this.getY() };
+	},
+	
+	setPosition: function(x, y) {
+		if (typeof x === 'number') {
+			this.setX(x);
+			this.setY(y);
+		}
+		else {
+			this.setX(x.x);
+			this.setY(x.y);
+		}
+	},
+	
 	hasComponent: function(componentType) {
 		if (typeof componentType === 'object') {
 			return this._components[componentType.name];
