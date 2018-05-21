@@ -90,6 +90,13 @@ Core.Game.prototype = {
 			goblin.setPosition(this.getMap().getRandomOpenCell());
 			this.getMap().addEntity(goblin);
 		}
+		
+		for (var i = 0; i < 50; i++) {
+			var item = Core.ItemFactory.create('potion');
+			var itemPosition = this.getMap().getRandomOpenCell();
+			
+			this.getMap().addItem(item, itemPosition.x, itemPosition.y);
+		}
 	},
 	
 	end: function() {
