@@ -106,10 +106,13 @@ Core.Components.Health = {
 	damage: function(attacker, damage) {
 		this._hp -= damage;
 		this.raiseEvent('onDamage', attacker, damage);
+		Core.MessageLog.add(String.format('%s hits %s for %s HP.', attacker.getName(), this.getName(), damage), 'combat');
 		
 		if (this._hp <= 0) {
 			this.raiseEvent('onDeath', attacker);
 			attacker.raiseEvent('onKill', this);
+			
+			Core.MessageLog.add(String.format('%s has died.', this.getName()), 'combat');
 		}
 	},
 	
