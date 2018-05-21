@@ -33,7 +33,7 @@ var Core = {
 	},
 	
 	init: function() {
-		this._display = new ROT.Display({ width: this._width, height: this._height, bg: '#222034' });
+		this._display = new ROT.Display({ width: this._width, height: this._height, bg: '#222034', fontFamily: 'Oxygen Mono' });
 		
 		var core = this;
 		

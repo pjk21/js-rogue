@@ -30,68 +30,159 @@
 		<script src="js/screens/mainMenuScreen.js"></script>
 		<script src="js/screens/playScreen.js"></script>
 		
+		<link href="https://fonts.googleapis.com/css?family=Oxygen+Mono" rel="stylesheet"> 
 		<style>
 			body {
-				background-color: rgb(40, 40, 70);
+				background: rgb(40, 40, 70);
 				margin-top: 20px;
+				font-family: 'Oxygen Mono', monospace;
 			}
-		
+			
 			#game {
-				display: table;
+				width: 950px;
+				height: 390px;
 				margin: auto;
-				width: 720px;
 			}
-		
+			
 			#gameCanvas {
-				display: block;
-				margin: auto;
+				width: 720px;
 				outline: 1px solid #9BADB7;
 			}
 			
+			#statsPanel {
+				float: right;
+				width: 225px;
+				height: 390px;
+				background: #222034;
+				color: white;
+				outline: 1px solid #9BADB7;
+			}
+			
+			#statsPanel ul {
+				margin: 5px 0;
+				padding: 0;
+				list-style-type: none;
+			}
+			
+			#statsPanel li {
+				margin: 2px 6px;
+			}
+			
+			#messageLog {
+				width: 950px;
+				margin: auto;
+			}
+			
 			#messageLogHeader {
-				background-color: #9BADB7;
-				padding: 0px 0px 0px 10px;
+				background: #98ADB7;
+				margin-top: 5px;
+				padding-left: 10px;
 				font-variant: small-caps;
-				font-size: 20px;
+				font-size: 18px;
 				font-weight: bold;
-				height: 32px;
-				line-height: 32px;
-				outline: 1px solid dimGray;
-				margin-top: 10px;
+				line-height: 28px;
+				outline: 1px solid #98ADB7;
 			}
 			
 			#messageLogHeaderToggle {
-				padding: 0px 3px;
-				background-color: white;
+				padding: 0 3px;
+				background: white;
 				float: right;
+			}
+			
+			#messageLogHeaderToggle a, a:link, a:hover, a:visited {
+				text-decoration: none;
 			}
 			
 			#messageLogContent {
 				overflow-y: scroll;
-				height: 180px;
+				height: 200px;
 				margin: 0;
-				padding: 0 5px;
-				list-style-position: inside;
-				background-color: #222034;
-				outline: 1px solid dimGray;
+				padding: 0;
+				list-style: none;
+				background: #222034;
+				outline: 1px solid #98ADB7;
 			}
 			
 			#messageLogContent li {
-				margin: 5px;
+				margin: 0;
 				color: white;
-				font-size: 12pt;
+				font-size: 11pt;
+				padding: 0 10px;
+			}
+			
+			#messageLogContent li:nth-child(odd) {
+				background: #4A4858;
+			}
+			
+			#messageLogContent li:first-child {
+				padding-top: 3px;
 			}
 			
 			.collapsed {
 				display: none;
 				overflow: collapse;
 			}
+			
+			.statBar {
+				display: block;
+				position: relative;
+				height: 20px;
+				border: 1px solid #98ADB7;
+				text-align: center;
+				color: white;
+			}
+			
+			.statBarValue {
+				display: inline-block;
+				position: absolute;
+				height: 100%;
+				top: 0;
+				left: 0;
+			}
+			
+			.statBarText {
+				display: inline-block;
+				position: absolute;
+				width: 100%;
+				text-align: center;
+				top: 0;
+				left: 0;
+			}
+			
+			#healthBar {
+				background: rgb(128, 0, 0);
+			}
+			
+			#healthBarValue {
+				background: red;
+			}
+			
+			#magicBar {
+				background: rgb(0, 0, 128);
+			}
+			
+			#magicBarValue {
+				background: rgb(0, 0, 255);
+			}
 		</style>
 	</head>
 	
 	<body>
-		<div id="game">
-
+		<div id="game">			
+			<div id="statsPanel">
+				<ul>
+					<li>
+						HP
+						<div id="healthBar" class="statBar">						
+							<div id="healthBarValue" class="statBarValue" style="width: 20%;"></div>
+							<div class="statBarText">20 / 100</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
 		<div id="messageLog">
 			<div id="messageLogHeader">
 				Message Log
@@ -104,6 +195,5 @@
 
 			</ul>
 		</div>
-	</div>
 	</body>
 </html>
