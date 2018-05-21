@@ -1,17 +1,17 @@
 Core.Tile = function(properties) {
 	properties = properties || {};
 	
-	this._name = properties['name'] || '';
+	this._name = properties.name || '';
 	
-	this._glyph = properties['glyph'] || '';
-	this._colour = properties['colour'] || 'white';
-	this._backColour = properties['backColour'] || 'black';
+	this._glyph = properties.glyph || '';
+	this._colour = properties.colour || 'white';
+	this._backColour = properties.backColour || 'black';
 	
-	this._walkable = properties['walkable'] || false;
-	this._transparent = properties['transparent'] || false;
+	this._walkable = properties.walkable || false;
+	this._transparent = properties.transparent || false;
 	
-	this._description = properties['description'] || '';
-}
+	this._description = properties.description || '';
+};
 
 Core.Tile.prototype = {
 	getGlyph: function() {
@@ -37,6 +37,6 @@ Core.Tile.prototype = {
 	getDescription: function() {
 		return this._description;
 	}
-}
+};
 
 Core.Tiles.nullTile = new Core.Tile();

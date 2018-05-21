@@ -15,8 +15,7 @@ Core.MessageLog = {
 			return;
 		}
 		
-		colour = this._types[type] || this._types['default'];
-		text = text + Math.random() * 20;
+		var colour = this._types[type] || this._types['default'];
 		
 		var message = document.createElement('li');
 		message.setAttribute('style', 'color: ' + colour + ';');
@@ -46,4 +45,4 @@ Core.MessageLog = {
 	hide: function() {
 		document.getElementById('messageLog').setAttribute('class', 'collapsed');
 	}
-}
+};

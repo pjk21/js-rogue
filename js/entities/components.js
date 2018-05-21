@@ -13,7 +13,7 @@ Core.Components.PlayerController = {
 	},
 	
 	init: function(properties) {
-		this._speed = properties['speed'] || 100;
+		this._speed = properties.speed || 100;
 	},
 	
 	act: function() {
@@ -27,7 +27,7 @@ Core.Components.PlayerController = {
 		Core.getGame().getEngine().lock();
 		this._acting = false;
 	}
-}
+};
 
 Core.Components.AiController = {
 	name: 'AiController',
@@ -44,8 +44,8 @@ Core.Components.AiController = {
 	},
 	
 	init: function(properties) {
-		this._speed = properties['speed'] || 100;
-		this._tasks = properties['tasks'] || [ Core.Tasks.rest ];
+		this._speed = properties.speed || 100;
+		this._tasks = properties.tasks || [ Core.Tasks.rest ];
 	},
 	
 	act: function() {
@@ -79,7 +79,7 @@ Core.Components.AiController = {
 			selectedTask.task(this);
 		}
 	}
-}
+};
 
 Core.Components.Health = {
 	name: 'Health',
@@ -97,16 +97,15 @@ Core.Components.Health = {
 	},
 	
 	init: function(properties) {
-		this._maxHp = properties['maxHp'] || 10;
-		this._hp = properties['hp'] || this._maxHp;
+		this._maxHp = properties.maxHp || 10;
+		this._hp = properties.hp || this._maxHp;
 		
-		this._restingHealRate = properties['restingHealRate'] || 0;
+		this._restingHealRate = properties.restingHealRate || 0;
 	},
 	
 	damage: function(attacker, damage) {
 		this._hp -= damage;
 		this.raiseEvent('onDamage', attacker, damage);
-		console.log(this.getName() + ' is hit by ' + attacker.getName() + '  for ' + damage + ' damage! ' + this._hp + '/' + this._maxHp);
 		
 		if (this._hp <= 0) {
 			this.raiseEvent('onDeath', attacker);
@@ -117,7 +116,7 @@ Core.Components.Health = {
 	heal: function(amount) {
 		this._hp = Math.min(this._hp + amount, this._maxHp);
 	}
-}
+};
 
 Core.Components.Combat = {
 	name: 'Combat',
@@ -131,8 +130,8 @@ Core.Components.Combat = {
 	},
 	
 	init: function(properties) {
-		this._strength = properties['strength'] || 1;
-		this._toughness = properties['toughness'] || 1;
+		this._strength = properties.strength || 1;
+		this._toughness = properties.toughness || 1;
 	},
 	
 	attack: function(target) {
@@ -144,7 +143,7 @@ Core.Components.Combat = {
 			target.damage(this, damage);
 		}
 	}
-}
+};
 
 Core.Components.Sight = {
 	name: 'Sight',
@@ -155,6 +154,6 @@ Core.Components.Sight = {
 	},
 	
 	init: function(properties) {
-		this._sightRadius = properties['sightRadius'] || 5;
+		this._sightRadius = properties.sightRadius || 5;
 	}
-}
+};

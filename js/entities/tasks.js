@@ -10,7 +10,7 @@ Core.Tasks.rest = {
 	getScore: function(entity) {
 		return 0;
 	}
-}
+};
 
 Core.Tasks.wander = {
 	execute: function(entity) {
@@ -27,4 +27,4 @@ Core.Tasks.wander = {
 	getScore: function(entity) {
 		return 0;
 	}
-}
+};

@@ -30,7 +30,7 @@ Core.EntityFactory = {
 				Core.Components.Combat,
 				Core.Components.Sight
 			]
-		})
+		});
 	},
 	
 	createGoblin: function() {
@@ -56,6 +56,6 @@ Core.EntityFactory = {
 				Core.Components.Combat,
 				Core.Components.Sight
 			]
-		})
+		});
 	}
 };

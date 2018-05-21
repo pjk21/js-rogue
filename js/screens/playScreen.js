@@ -1,8 +1,8 @@
 Core.Screens.playScreen = {	
 	init: function(data) {
-		data = data || {}
+		data = data || {};
 		
-		Core.setGame(data['game'] || new Core.Game());
+		Core.setGame(data.game || new Core.Game());
 		
 		Core.getGame().init();
 		Core.getGame().getEngine().start();
@@ -48,8 +48,8 @@ Core.Screens.playScreen = {
 							}
 						}
 					} else {
-						var fogColour = [ 34, 32, 52 ]
-						const fogPercent = 0.7;
+						var fogColour = [ 34, 32, 52 ];
+						var fogPercent = 0.7;
 						
 						colour = ROT.Color.toHex(ROT.Color.interpolate(ROT.Color.fromString(tile.getColour()), fogColour, fogPercent));
 						backColour = ROT.Color.toHex(ROT.Color.interpolate(ROT.Color.fromString(tile.getBackColour()), fogColour, fogPercent));
@@ -61,11 +61,11 @@ Core.Screens.playScreen = {
 		}
 		
 		if (Core.getGame().getEnded()) {
-			var gameOverText = [ 'You have died', 'Press any key to continue' ]
-			var y = Math.floor(Core.getHeight() / 2) - Math.floor(gameOverText.length / 2);
+			var gameOverText = [ 'You have died', 'Press any key to continue' ];
+			var gameOverTextY = Math.floor(Core.getHeight() / 2) - Math.floor(gameOverText.length / 2);
 			
 			for (var i = 0; i < gameOverText.length; i++) {
-				display.drawText(Core.getWidth() / 2 - gameOverText[i].length / 2, y++, '%c{white}%b{red}' + gameOverText[i]);	
+				display.drawText(Core.getWidth() / 2 - gameOverText[i].length / 2, gameOverTextY++, '%c{white}%b{red}' + gameOverText[i]);	
 			}
 		}
 	},
@@ -100,4 +100,4 @@ Core.Screens.playScreen = {
 			}
 		}
 	}
-}
+};

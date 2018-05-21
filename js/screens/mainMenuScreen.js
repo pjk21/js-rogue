@@ -65,4 +65,4 @@ Core.Screens.mainMenuScreen = {
 			}
 		}
 	}
-}
+};

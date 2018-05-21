@@ -1,8 +1,8 @@
 Core.Map = function(properties) {
 	properties = properties || {};
 	
-	this._width = properties['width'] || Core.getWidth();
-	this._height = properties['height'] || Core.getHeight();
+	this._width = properties.width || Core.getWidth();
+	this._height = properties.height || Core.getHeight();
 	
 	this._tiles = [];
 	this._explored = [];
@@ -15,7 +15,7 @@ Core.Map = function(properties) {
 	}, { topology: 4 });
 	
 	this._entities = {};
-}
+};
 
 Core.Map.prototype = {
 	getWidth: function() {
@@ -86,7 +86,7 @@ Core.Map.prototype = {
 		do {
 			x = Math.floor(Math.random() * this.getWidth());
 			y = Math.floor(Math.random() * this.getHeight());
-		} while (!this.isOpenCell(x, y))
+		} while (!this.isOpenCell(x, y));
 			
 		return {
 			x: x,
@@ -173,8 +173,8 @@ Core.Map.prototype = {
 	_generate: function(properties) {
 		var map = this;
 		
-		var generator = properties['generator'];
-		var generatorConfig = properties['generatorConfig'] || {};
+		var generator = properties.generator;
+		var generatorConfig = properties.generatorConfig || {};
 		
 		if (!generator.prototype.create) {
 			this._generator = new ROT.Map.Arena(this._width, this._height);
@@ -184,7 +184,7 @@ Core.Map.prototype = {
 			this._generator = new generator(this._width, this._height, generatorConfig);
 		}
 		
-		var tiles = properties['tiles'] || [];
+		var tiles = properties.tiles || [];
 		
 		var generatorCallback = function(x, y, value) {		
 			if (tiles[value]) {
@@ -195,15 +195,15 @@ Core.Map.prototype = {
 			}
 		};
 		
-		if (properties['onGenerate']) {
-			properties['onGenerate'](this._generator, generatorCallback);
+		if (properties.onGenerate) {
+			properties.onGenerate(this._generator, generatorCallback);
 		}
 		else {
 			this._generator.create(generatorCallback);
 		}
 		
-		if (properties['onPostGenerate']) {
-			properties['onPostGenerate'](this, this._generator, generatorCallback)
+		if (properties.onPostGenerate) {
+			properties.onPostGenerate(this, this._generator, generatorCallback);
 		}	
 		
 		for (var x = 0; x < this.getWidth(); x++) {
@@ -213,4 +213,4 @@ Core.Map.prototype = {
 			}
 		}
 	},
-}
+};

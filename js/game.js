@@ -3,7 +3,7 @@ Core.Game = function(options) {
 	
 	this._scheduler = new ROT.Scheduler.Speed();
 	this._engine = new ROT.Engine(this._scheduler);
-}
+};
 
 Core.Game.prototype = {
 	getMap: function() {
@@ -98,4 +98,4 @@ Core.Game.prototype = {
 		this.getEngine().lock();
 		Core.refresh();
 	}
-}
+};

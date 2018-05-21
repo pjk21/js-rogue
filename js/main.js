@@ -44,7 +44,7 @@ var Core = {
 						core.refresh();
 					}
 				}
-			})
+			});
 		};
 		
 		bindEventToScreen('keydown');
@@ -73,7 +73,7 @@ var Core = {
 		this.getDisplay().clear();
 		this.getCurrentScreen().render(this.getDisplay());
 	}
-}
+};
 
 // Modules
 Core.Screens = {};
@@ -102,4 +102,4 @@ window.onload = function() {
 		
 		Core.setScreen(Core.Screens.mainMenuScreen);
 	}
-}
+};

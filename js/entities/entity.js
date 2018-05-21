@@ -1,20 +1,20 @@
 Core.Entity = function(properties) {
 	properties = properties || {};
 	
-	this._name = properties['name'] || '';
+	this._name = properties.name || '';
 	
-	this._x = properties['x'] || 0;
-	this._y = properties['y'] || 0;
+	this._x = properties.x || 0;
+	this._y = properties.y || 0;
 	
-	this._glyph = properties['glyph'] || '@';
-	this._colour = properties['colour'] || 'white';
-	this._backColour = properties['backColour'] || undefined;
+	this._glyph = properties.glyph || '@';
+	this._colour = properties.colour || 'white';
+	this._backColour = properties.backColour || undefined;
 	
 	this._components = {};
 	this._componentGroups = {};
 	this._listeners = {};
 	
-	var components = properties['components'] || {};
+	var components = properties.components || {};
 	
 	for (var i = 0; i < components.length; i++) {
 		for (var key in components[i]) {
@@ -30,12 +30,12 @@ Core.Entity = function(properties) {
 		}
 		
 		if (components[i].listeners) {
-			for (var key in components[i].listeners) {
-				if (!this._listeners[key]) {
-					this._listeners[key] = [];
+			for (var listenerKey in components[i].listeners) {
+				if (!this._listeners[listenerKey]) {
+					this._listeners[listenerKey] = [];
 				}
 				
-				this._listeners[key].push(components[i].listeners[key]);
+				this._listeners[listenerKey].push(components[i].listeners[listenerKey]);
 			}
 		}
 		
@@ -43,7 +43,7 @@ Core.Entity = function(properties) {
 			components[i].init.call(this, properties);
 		}
 	}
-}
+};
 
 Core.Entity.prototype = {
 	getName: function() {
@@ -155,4 +155,4 @@ Core.Entity.prototype = {
 		
 		return results;
 	}
-}
+};

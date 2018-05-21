@@ -8,7 +8,7 @@ Core.Tiles.floorTile = new Core.Tile({
 	
 	walkable: true,
 	transparent: true
-})
+});
 
 Core.Tiles.grassTile = new Core.Tile({
 	name: 'Grass',
@@ -20,7 +20,7 @@ Core.Tiles.grassTile = new Core.Tile({
 	
 	walkable: true,
 	transparent: true
-})
+});
 
 Core.Tiles.wallTile = new Core.Tile({
 	name: 'Cave Wall',
@@ -32,7 +32,7 @@ Core.Tiles.wallTile = new Core.Tile({
 	
 	walkable: false,
 	transparent: false
-})
+});
 
 Core.Tiles.mossyWallTile = new Core.Tile({
 	name: 'Mossy Cave Wall',
@@ -44,4 +44,4 @@ Core.Tiles.mossyWallTile = new Core.Tile({
 	
 	walkable: false,
 	transparent: false
-})
+});
