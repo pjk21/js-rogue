@@ -15,6 +15,7 @@ Core.Map = function(properties) {
 	}, { topology: 4 });
 	
 	this._entities = {};
+	this._items = {};
 };
 
 Core.Map.prototype = {
@@ -168,6 +169,42 @@ Core.Map.prototype = {
 	getEntityAt: function(x, y) {
 		var index = this.getCellIndex(x, y);
 		return this._entities[index];
+	},
+	
+	addItem: function(item, x, y) {
+		var index = this.getCellIndex(x, y);
+		
+		if (this._items[index]) {
+			this._items[index].push(item);
+		}
+		else {
+			this._items[index] = [ item ];
+		}
+		
+		item.setPosition(x, y);
+	},
+	
+	removeItem: function(item) {
+		var index = this.getCellIndex(item.getX(), item.getY());
+		
+		if (this._items[index]) {
+			for (var i = 0; i < this._items[index].length; i++) {
+				if (this._items[index][i] === item) {
+					this._items[index].splice(i, 1);
+					
+					if (this._items[index].length === 0) {
+						delete this._items[index];
+					}
+					
+					return;
+				}
+			}
+		}
+	},
+	
+	getItemsAt: function(x, y) {
+		var index = this.getCellIndex(x, y);
+		return this._items[index];		
 	},
 	
 	_generate: function(properties) {

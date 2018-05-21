@@ -37,6 +37,18 @@ Core.Screens.playScreen = {
 					var backColour = tile.getBackColour();
 					
 					if (visibleCells[index]) {
+						var items = map.getItemsAt(x, y);
+						
+						if (items) {
+							var item = items[items.length - 1];
+							glyph = item.getGlyph();
+							colour = item.getColour();
+							
+							if (item.getBackColour()) {
+								backColour = item.getBackColour();
+							}
+						}
+						
 						if (map.getEntityAt(x, y)) {
 							var entity = map.getEntityAt(x, y);
 							
