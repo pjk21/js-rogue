@@ -86,7 +86,7 @@ Core.Game.prototype = {
 		this.getMap().addEntity(this.getPlayer());
 		
 		for (var i = 0; i < 20; i++) {
-			var goblin = Core.EntityFactory.createGoblin();
+			var goblin = Core.EntityFactory.create("goblin");
 			goblin.setPosition(this.getMap().getRandomOpenCell());
 			this.getMap().addEntity(goblin);
 		}
