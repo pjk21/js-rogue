@@ -3,6 +3,8 @@ Core.Entity = function(properties) {
 	
 	Core.GameObject.call(this, properties);
 	
+	this._map = null;
+	
 	this._x = properties.x || 0;
 	this._y = properties.y || 0;
 };
