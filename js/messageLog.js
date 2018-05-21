@@ -24,6 +24,8 @@ Core.MessageLog = {
 		this._messagesElement.prepend(message);
 		
 		this._messages.push({ text: text, colour: colour, htmlElement: message });
+	
+		setTimeout(function() { message.setAttribute('style', 'color: %s; opacity: 0.4;'.format(colour)); }, 3000);
 	},
 
 	clear: function() {
