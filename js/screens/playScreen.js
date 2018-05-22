@@ -80,6 +80,8 @@ Core.Screens.playScreen = {
 				display.drawText(Core.getWidth() / 2 - gameOverText[i].length / 2, gameOverTextY++, '%c{white}%b{red}' + gameOverText[i]);	
 			}
 		}
+		
+		Core.UI.update();
 	},
 	
 	handleInput: function(inputType, inputData) {

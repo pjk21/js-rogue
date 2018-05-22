@@ -51,6 +51,7 @@ var Core = {
 		bindEventToScreen('keypress');
 		
 		this.MessageLog.init();
+		this.UI.init();
 	},
 	
 	setScreen: function(screen) {
