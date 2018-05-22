@@ -160,3 +160,64 @@ Core.Components.Sight = {
 		this._sightRadius = properties.sightRadius || 5;
 	}
 };
+
+Core.Components.Inventory = {
+	name: 'Inventory',
+	group: 'Inventory',
+	
+	getItems: function() {
+		return this._items;
+	},
+	
+	init: function(properties) {
+		this._items = [];
+	},
+	
+	addItem: function(item) {
+		this._items.push(item);
+	},
+	
+	removeItem: function(item) {
+		var index = this._items.indexOf(item);
+		
+		if (item) {
+			this._items.splice(index, 1);
+		}
+		
+		return true;
+	},
+	
+	takeItem: function() {
+		var items = this.getMap().getItemsAt(this.getX(), this.getY());
+		
+		if (items) {
+			var item = items[items.length - 1];
+			this.addItem(item);
+			
+			this.getMap().removeItem(item);
+			Core.MessageLog.add('You take the %s.'.format(item.getName()), 'info');
+			
+			return true;
+		}
+
+		Core.MessageLog.add('There are no items to pickup!', 'warning');
+		return false;
+	},
+	
+	dropItem: function(item) {
+		var index = this._items.indexOf(item);
+		
+		if (index >= 0) {
+			if (this.getMap()) {
+				this.getMap().addItem(item, this.getX(), this.getY());
+			}
+			
+			this._items.splice(index, 1);
+			
+			Core.MessageLog.add('You drop the %s.'.format(item.getName()), 'info');
+			return true;
+		}
+		
+		return false;
+	}
+};

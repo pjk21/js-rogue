@@ -38,7 +38,8 @@ Core.EntityFactory.createPlayer = function() {
 			Core.Components.PlayerController,
 			Core.Components.Health,
 			Core.Components.Combat,
-			Core.Components.Sight
+			Core.Components.Sight,
+			Core.Components.Inventory
 		]
 	});
 };

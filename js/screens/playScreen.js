@@ -106,6 +106,9 @@ Core.Screens.playScreen = {
 			else if (inputData.keyCode === ROT.VK_DOWN) {
 				didAct = player.move(0, 1);
 			}
+			else if (inputData.keyCode === ROT.VK_G) {
+				didAct = player.takeItem();
+			}
 			
 			if (didAct) {
 				Core.getGame().getEngine().unlock();

@@ -1,7 +1,8 @@
 Core.MessageLog = {
 	_types: {
 		'default': 'white',
-		'info': 'blue',
+		'info': 'lightBlue',
+		'warning': 'orange',
 		'combat': 'red'
 	},
 	
