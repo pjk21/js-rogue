@@ -221,3 +221,99 @@ Core.Components.Inventory = {
 		return false;
 	}
 };
+
+Core.Components.BodyPart = function(properties) {
+	properties = properties || {};
+
+	this._name = properties.name || '';
+	this._equipped = properties.equipped || null;
+	this._allowEquipment = properties.allowEquipment || true;		
+},
+
+Core.Components.BodyPart.prototype = {
+	getName: function() {
+		return this._name;
+	},
+	
+	canHaveEquipment: function() {
+		return this._allowEquipment;
+	},
+	
+	getEquipped: function() {
+		return this._equipped;
+	},
+	
+	setEquipped: function(item) {
+		this._equipped = item;
+	}
+};
+
+Core.Components.Body = {	
+	getBodyPart: function(name) {
+		return this._bodyParts[name];
+	},
+	
+	init: function(properties) {
+		this._body = {};
+		
+		if (properties.body) {
+			for (var key in properties.body) {
+				var part = properties.body[key];
+				
+				var equipment = part.getEquipped();
+				
+				if (equipment) {
+					if(typeof equipment === 'string') {
+						var item = Core.ItemFactory.create(equipment);
+						
+						if (item.getEquipmentSlot() === part.getName()) {
+							part.setEquipped(item);
+							item.setEquippedOn(part);
+						}
+						else {
+							part.setEquipped(null);
+							equipment.setEquippedOn(null);
+						}
+					}
+				}
+				
+				this._body[part.getName()] = part;
+			}
+		}
+	},
+	
+	equip: function(item) {
+		if (item.hasComponent('Equipment')) {
+			var bodyPart = this.getBodyPart(item.getEquipmentSlot());
+			
+			if (bodyPart && bodyPart.canHaveEquipment()) {
+				if (bodyPart.getEquipped()) {
+					this.unequip(bodyPart.getEquipped());
+				}
+				
+				bodyPart.setEquipped(item);
+				item.setEquippedOn(bodyPart);
+				
+				Core.MessageLog.add('You equip the %s.'.format(item.getName()), 'info');
+				return true;
+			}
+		}
+		
+		Core.MessageLog.add('You cannot equip the %s.'.format(item.getName()), 'warning');
+		return false;
+	},
+	
+	unequip: function(item) {
+		var bodyPart = item.getEquippedOn();
+		
+		if (bodyPart && this.getBodyPart(bodyPart.getName()) === bodyPart) {
+			bodyPart.setEquipped(null);
+			item.setEquippedOn(null);
+			
+			Core.MessageLog.add('You unequip the %s.'.format(item.getName()), 'info');
+			return true;
+		}
+		
+		return false;
+	}
+};

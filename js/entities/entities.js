@@ -1,5 +1,31 @@
 Core.EntityFactory = new Core.Factory(Core.Entity);
 
+Core.EntityFactory.createPlayer = function() {
+	return new Core.Entity({
+		name: 'Player',
+		
+		glyph: '@',
+		
+		strength: 5,
+		toughness: 1,
+		sightRadius: 6,
+		
+		body: {
+			head: new Core.Components.BodyPart({ name: 'head', equipped: 'leatherHelmet' }),
+			torso: new Core.Components.BodyPart({ name: 'torso' })
+		},
+		
+		components: [
+			Core.Components.PlayerController,
+			Core.Components.Health,
+			Core.Components.Combat,
+			Core.Components.Sight,
+			Core.Components.Inventory,
+			Core.Components.Body
+		]
+	});
+};
+
 Core.EntityFactory.define('goblin', {
 	name: 'goblin',
 	
@@ -23,23 +49,3 @@ Core.EntityFactory.define('goblin', {
 		Core.Components.Sight
 	]
 });
-
-Core.EntityFactory.createPlayer = function() {
-	return new Core.Entity({
-		name: 'Player',
-		
-		glyph: '@',
-		
-		strength: 5,
-		toughness: 1,
-		sightRadius: 6,
-		
-		components: [
-			Core.Components.PlayerController,
-			Core.Components.Health,
-			Core.Components.Combat,
-			Core.Components.Sight,
-			Core.Components.Inventory
-		]
-	});
-};

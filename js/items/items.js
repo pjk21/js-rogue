@@ -18,3 +18,16 @@ Core.ItemFactory.define('potion', {
 		Core.Components.Consumable
 	]
 });
+
+Core.ItemFactory.define('leatherHelmet', {
+	name: 'leather helmet',
+	
+	glyph: '^',
+	colour: 'brown',
+	
+	equipmentSlot: 'head',
+	
+	components: [
+		Core.Components.Equipment
+	]
+});

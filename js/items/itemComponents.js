@@ -34,3 +34,22 @@ Core.Components.Consumable = {
 		return true;
 	}
 };
+
+Core.Components.Equipment = {
+	getEquipmentSlot: function() {
+		return this._equipmentSlot;
+	},
+
+	getEquippedOn: function() {
+		return this._equippedOn;
+	},
+	
+	setEquippedOn: function(bodyPart) {
+		this._equippedOn = bodyPart;
+	},
+	
+	init: function(properties) {
+		this._equipmentSlot = properties.equipmentSlot || null;
+		this._equippedOn = null;
+	}
+};
