@@ -12,7 +12,11 @@ Core.EntityFactory.createPlayer = function() {
 		
 		body: {
 			head: new Core.Components.BodyPart({ name: 'head', equipped: 'leatherHelmet' }),
-			torso: new Core.Components.BodyPart({ name: 'torso' })
+			torso: new Core.Components.BodyPart({ name: 'torso' }),
+			mainHand: new Core.Components.BodyPart({ name: 'mainHand' }),
+			offHand: new Core.Components.BodyPart({ name: 'offHand' }),
+			legs: new Core.Components.BodyPart({ name: 'legs' }),
+			feet: new Core.Components.BodyPart({ name: 'feet' })
 		},
 		
 		components: [

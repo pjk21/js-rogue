@@ -227,16 +227,11 @@ Core.Components.BodyPart = function(properties) {
 
 	this._name = properties.name || '';
 	this._equipped = properties.equipped || null;
-	this._allowEquipment = properties.allowEquipment || true;		
 },
 
 Core.Components.BodyPart.prototype = {
 	getName: function() {
 		return this._name;
-	},
-	
-	canHaveEquipment: function() {
-		return this._allowEquipment;
 	},
 	
 	getEquipped: function() {
@@ -290,7 +285,7 @@ Core.Components.Body = {
 		if (item.hasComponent('Equipment')) {
 			var bodyPart = this.getBodyPart(item.getEquipmentSlot());
 			
-			if (bodyPart && bodyPart.canHaveEquipment()) {
+			if (bodyPart) {
 				if (bodyPart.getEquipped()) {
 					this.unequip(bodyPart);
 				}
