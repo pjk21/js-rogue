@@ -8,10 +8,23 @@ Core.ItemFactory.define('potion', {
 	
 	onConsume: function(entity) {
 		entity.heal(10);
+		
+		Core.MessageLog.add('You heal for 10 hit points!', 'success');
+		return true;
 	},
 	
 	canConsume: function(entity) {
-		return entity.hasComponent('Health') && entity.getHp() < entity.getMaxHp();
+		if (entity.hasComponent('Health')) {
+			if (entity.getHp() < entity.getMaxHp()) {
+				return true;
+			}
+			else {
+				Core.MessageLog.add('You are already at full health!', 'warning');
+				return false;
+			}
+		}
+		
+		return false;
 	},
 	
 	components: [

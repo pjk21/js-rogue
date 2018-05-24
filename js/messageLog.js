@@ -3,7 +3,8 @@ Core.MessageLog = {
 		'default': 'white',
 		'info': 'lightBlue',
 		'warning': 'orange',
-		'combat': 'red'
+		'combat': 'red',
+		'success': 'lightGreen'
 	},
 	
 	init: function() {

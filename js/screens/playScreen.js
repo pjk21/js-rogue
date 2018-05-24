@@ -1,4 +1,6 @@
-Core.Screens.playScreen = {	
+Core.Screens.playScreen = {
+	_subScreen: null,
+	
 	init: function(data) {
 		data = data || {};
 		
@@ -9,6 +11,11 @@ Core.Screens.playScreen = {
 	},
 	
 	render: function(display) {
+		if (this._subScreen) {
+			this._subScreen.render(display);
+			return;
+		}
+		
 		var map = Core.getGame().getMap();
 		var player = Core.getGame().getPlayer();
 		
@@ -90,6 +97,11 @@ Core.Screens.playScreen = {
 				Core.setScreen(Core.Screens.mainMenuScreen);
 			}
 			
+			if (this._subScreen) {
+				this._subScreen.handleInput(inputType, inputData);
+				return;
+			}
+			
 			var player = Core.getGame().getPlayer();
 			var didAct = false;
 			
@@ -111,10 +123,18 @@ Core.Screens.playScreen = {
 			else if (inputData.keyCode === ROT.VK_G) {
 				didAct = player.takeItem();
 			}
+			else if (inputData.keyCode === ROT.VK_I) {
+				this.setSubScreen(Core.Screens.inventoryScreen.init());
+			}
 			
 			if (didAct) {
 				Core.getGame().getEngine().unlock();
 			}
 		}
+	},
+	
+	setSubScreen: function(screen) {
+		this._subScreen = screen;
+		Core.refresh();
 	}
 };

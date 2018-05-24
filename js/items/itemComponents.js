@@ -1,6 +1,10 @@
 Core.Components.Consumable = {
-	isFinished: function() {
-		return this._consumptionsRemaining > 0;
+	listeners: {
+		getInventoryActions: function() {
+			return [
+				{ text: 'consume', action: this.consume }
+			];
+		}
 	},
 	
 	init: function(properties) {
@@ -11,10 +15,15 @@ Core.Components.Consumable = {
 		this._consumptionsRemaining = this._maximumConsumptions;
 	},
 	
-	consume: function(entity) {
-		if (!this.isFinished() && this.canConsume(entity)) {
+	consume: function(entity) {		
+		if (this.canConsume(entity)) {		
 			if (this._onConsume(entity)) {
-				this._consumptions--;
+				this._consumptionsRemaining--;
+
+				if (this._consumptionsRemaining === 0) {
+					entity.removeItem(this);
+				}
+				
 				return true;
 			}
 		}
@@ -23,7 +32,11 @@ Core.Components.Consumable = {
 	},
 	
 	canConsume: function(entity) {
-		if (!this._onConsume) {
+		if (!this._onConsume) {			
+			return false;
+		}
+		
+		if (this._consumptionsRemaining === 0) {
 			return false;
 		}
 		
