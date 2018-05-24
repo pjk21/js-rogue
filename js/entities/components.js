@@ -255,6 +255,10 @@ Core.Components.Body = {
 		return this._body[name];
 	},
 	
+	getBody: function() {
+		return this._body;
+	},
+	
 	init: function(properties) {
 		this._body = {};
 		
@@ -304,6 +308,10 @@ Core.Components.Body = {
 	},
 	
 	unequip: function(bodyPart) {
+		if (typeof bodyPart === 'string') {
+			bodyPart = this.getBodyPart(bodyPart);
+		}
+		
 		if (bodyPart && bodyPart.getEquipped()) {
 			var item = bodyPart.getEquipped();
 			

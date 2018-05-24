@@ -83,7 +83,13 @@ Core.Screens.itemDetailsScreen = {
 		}
 	},
 	
-	drop: function(entity) {		
+	drop: function(entity) {
+		if (this.hasComponent('Equipment')) {
+			if (entity.getBodyPart(this.getEquipmentSlot()).getEquipped() === this) {
+				entity.unequip(this.getEquipmentSlot());
+			}
+		}
+		
 		return entity.dropItem(this);
 	}
 };

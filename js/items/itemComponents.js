@@ -59,9 +59,16 @@ Core.Components.Equipment = {
 	
 	listeners: {
 		getInventoryActions: function() {
-			return [
-				{ text: 'equip', action: this.equip }
-			];
+			if (Core.getGame().getPlayer().getBodyPart(this.getEquipmentSlot()).getEquipped() === this) {
+				return [
+					{ text: 'unequip', action: this.unequip }
+				];
+			}
+			else {
+				return [
+					{ text: 'equip', action: this.equip }
+				];
+			}
 		}
 	},
 	
@@ -76,4 +83,12 @@ Core.Components.Equipment = {
 		
 		return false;
 	},
+	
+	unequip: function(entity) {
+		if (entity.hasComponent('Body')) {
+			return entity.unequip(this.getEquipmentSlot());
+		}
+		
+		return false;
+	}
 };
