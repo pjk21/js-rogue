@@ -139,8 +139,14 @@ Core.Components.Combat = {
 	
 	attack: function(target) {
 		if (target.hasComponent(Core.Components.Combat)) {
-			var attack = this.getStrength();
+			var attack = this.getStrength();		
 			var defense = target.getToughness();
+			
+			if (this.hasComponent('Body')) {
+				attack += this.getEquipmentAttack();
+				defense += this.getEquipmentDefense();
+			}
+			
 			var damage = 1 + Math.floor(Math.random() * Math.max(0, attack - defense));
 			
 			target.damage(this, damage);
@@ -252,6 +258,34 @@ Core.Components.Body = {
 	
 	getBody: function() {
 		return this._body;
+	},
+	
+	getEquipmentAttack: function() {
+		var result = 0;
+		
+		for (var key in this.getBody()) {
+			var bodyPart = this.getBodyPart(key);
+			
+			if (bodyPart.getEquipped()) {
+				result += bodyPart.getEquipped().getAttackValue();
+			}
+		}
+		
+		return result;
+	},
+	
+	getEquipmentDefense: function() {
+		var result = 0;
+		
+		for (var key in this.getBody()) {
+			var bodyPart = this.getBodyPart(key);
+			
+			if (bodyPart.getEquipped()) {
+				result += bodyPart.getEquipped().getDefenseValue();
+			}
+		}
+		
+		return result;
 	},
 	
 	init: function(properties) {

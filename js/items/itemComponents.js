@@ -57,6 +57,14 @@ Core.Components.Equipment = {
 		return this._equipmentSlot;
 	},
 	
+	getAttackValue: function() {
+		return this._attackValue;
+	},
+	
+	getDefenseValue: function() {
+		return this._defenseValue;
+	},
+	
 	listeners: {
 		getInventoryActions: function() {
 			if (Core.getGame().getPlayer().getBodyPart(this.getEquipmentSlot()).getEquipped() === this) {
@@ -74,6 +82,9 @@ Core.Components.Equipment = {
 	
 	init: function(properties) {
 		this._equipmentSlot = properties.equipmentSlot || null;
+		
+		this._attackValue = properties.attackValue || 0;
+		this._defenseValue = properties.defenseValue || 0;
 	},
 	
 	equip: function(entity) {	

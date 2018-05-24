@@ -57,3 +57,18 @@ Core.ItemFactory.define('ironHelmet', {
 		Core.Components.Equipment
 	]
 });
+
+Core.ItemFactory.define('ironSword', {
+	name: 'iron sword',
+	
+	glyph: '/',
+	colour: 'silver',
+	
+	equipmentSlot: 'mainHand',
+	
+	attackValue: 10,
+	
+	components: [
+		Core.Components.Equipment
+	]
+});
