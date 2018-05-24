@@ -44,3 +44,16 @@ Core.ItemFactory.define('leatherHelmet', {
 		Core.Components.Equipment
 	]
 });
+
+Core.ItemFactory.define('ironHelmet', {
+	name: 'iron helmet',
+	
+	glyph: '^',
+	colour: 'silver',
+	
+	equipmentSlot: 'head',
+	
+	components: [
+		Core.Components.Equipment
+	]
+});

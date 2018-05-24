@@ -91,6 +91,9 @@ Core.Game.prototype = {
 			this.getMap().addEntity(goblin);
 		}
 		
+		var helm = Core.ItemFactory.create('ironHelmet');
+		this.getMap().addItem(helm, this.getPlayer().getX(), this.getPlayer().getY());
+		
 		for (var i = 0; i < 50; i++) {
 			var item = Core.ItemFactory.create('potion');
 			var itemPosition = this.getMap().getRandomOpenCell();

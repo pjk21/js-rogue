@@ -1,4 +1,6 @@
 Core.Components.Consumable = {
+	name: 'Consumable',
+	
 	listeners: {
 		getInventoryActions: function() {
 			return [
@@ -49,11 +51,29 @@ Core.Components.Consumable = {
 };
 
 Core.Components.Equipment = {
+	name: 'Equipment',
+	
 	getEquipmentSlot: function() {
 		return this._equipmentSlot;
 	},
 	
+	listeners: {
+		getInventoryActions: function() {
+			return [
+				{ text: 'equip', action: this.equip }
+			];
+		}
+	},
+	
 	init: function(properties) {
 		this._equipmentSlot = properties.equipmentSlot || null;
-	}
+	},
+	
+	equip: function(entity) {	
+		if (entity.hasComponent('Body')) {
+			return entity.equip(this);
+		}
+		
+		return false;
+	},
 };
