@@ -250,7 +250,7 @@ Core.Components.BodyPart.prototype = {
 
 Core.Components.Body = {	
 	getBodyPart: function(name) {
-		return this._bodyParts[name];
+		return this._body[name];
 	},
 	
 	init: function(properties) {
@@ -268,11 +268,9 @@ Core.Components.Body = {
 						
 						if (item.getEquipmentSlot() === part.getName()) {
 							part.setEquipped(item);
-							item.setEquippedOn(part);
 						}
 						else {
 							part.setEquipped(null);
-							equipment.setEquippedOn(null);
 						}
 					}
 				}
@@ -292,7 +290,6 @@ Core.Components.Body = {
 				}
 				
 				bodyPart.setEquipped(item);
-				item.setEquippedOn(bodyPart);
 				
 				Core.MessageLog.add('You equip the %s.'.format(item.getName()), 'info');
 				return true;
@@ -303,12 +300,10 @@ Core.Components.Body = {
 		return false;
 	},
 	
-	unequip: function(item) {
-		var bodyPart = item.getEquippedOn();
-		
-		if (bodyPart && this.getBodyPart(bodyPart.getName()) === bodyPart) {
+	unequip: function(bodyPart) {		
+		if (bodyPart && bodyPart.getEquipped()) {
+			var item = bodyPart.getEquipped();
 			bodyPart.setEquipped(null);
-			item.setEquippedOn(null);
 			
 			Core.MessageLog.add('You unequip the %s.'.format(item.getName()), 'info');
 			return true;
