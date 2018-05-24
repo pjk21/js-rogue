@@ -31,9 +31,10 @@ Core.Screens.inventoryScreen = {
 		var y = 2;
 				
 		for (var i = 0; i < this._items.length; i++) {
-			var colour = this._selectedItemIndex === i ? 'white' : 'dimGray';
+			var colour = 'dimGray';
 			
-			if (this._selectedItemIndex === i) {
+			if (this._mode === 'Items' && this._selectedItemIndex === i) {
+				colour = 'white';
 				display.drawText(2, y, '%c{white}>');
 			}
 			
@@ -53,11 +54,14 @@ Core.Screens.inventoryScreen = {
 			display.drawText(Core.getWidth() / 2 + 3, y, '%c{%s}%s'.format(titleColour, bodyPart.getName()));
 			
 			if (bodyPart.getEquipped()) {
-				if (this._selectedEquipmentIndex === i) {
+				var colour = 'dimGray';
+				
+				if (this._mode === 'Equipment' && this._selectedEquipmentIndex === i) {
+					colour = 'white';
 					display.drawText(Core.getWidth() - 25, y, '> ');
 				}
 				
-				display.drawText(Core.getWidth() - 23, y++, '%c{white}%s'.format(bodyPart.getEquipped().getName()));
+				display.drawText(Core.getWidth() - 23, y++, '%c{%s}%s'.format(colour, bodyPart.getEquipped().getName()));
 			}
 			else {
 				display.drawText(Core.getWidth() - 23, y++, '%c{dimGray}none');
