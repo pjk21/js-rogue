@@ -32,6 +32,35 @@ Core.ItemFactory.define('potion', {
 	]
 });
 
+Core.ItemFactory.define('antidote', {
+	name: 'antidote',
+	
+	glyph: '!',
+	colour: 'blue',
+	
+	onConsume: function(entity) {
+		if (entity.effects.poison) {
+			entity.removeEffect('poison');
+			
+			Core.MessageLog.add('You cure yourself of poison!', 'info');
+			return true;
+		}
+	},
+	
+	canConsume: function(entity) {
+		if (!entity.effects.poison) {
+			Core.MessageLog.add('You are not poisoned!', 'warning');
+			return false;
+		}
+		
+		return true;
+	},
+	
+	components: [
+		Core.Components.Consumable
+	]
+});
+
 Core.ItemFactory.define('leatherHelmet', {
 	name: 'leather helmet',
 	

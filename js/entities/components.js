@@ -78,6 +78,8 @@ Core.Components.AiController = {
 		if (selectedTask.task) {
 			selectedTask.task(this);
 		}
+		
+		this.endTurn();
 	}
 };
 

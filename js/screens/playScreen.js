@@ -128,6 +128,7 @@ Core.Screens.playScreen = {
 			}
 			
 			if (didAct) {
+				player.endTurn();
 				Core.getGame().getEngine().unlock();
 			}
 		}

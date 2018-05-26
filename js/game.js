@@ -94,8 +94,10 @@ Core.Game.prototype = {
 		var helm = Core.ItemFactory.create('ironHelmet');
 		this.getMap().addItem(helm, this.getPlayer().getX(), this.getPlayer().getY());
 		
+		var itemOptions = [ 'potion', 'antidote' ];
+		
 		for (var i = 0; i < 50; i++) {
-			var item = Core.ItemFactory.create('potion');
+			var item = Core.ItemFactory.create(itemOptions[i % itemOptions.length]);
 			var itemPosition = this.getMap().getRandomOpenCell();
 			
 			this.getMap().addItem(item, itemPosition.x, itemPosition.y);

@@ -4,6 +4,7 @@ Core.Entity = function(properties) {
 	Core.GameObject.call(this, properties);
 	
 	this._map = null;
+	this.effects = {};
 };
 
 Core.Entity.extend(Core.GameObject);
@@ -15,6 +16,38 @@ Object.assign(Core.Entity.prototype, {
 	
 	setMap: function(map) {
 		this._map = map;
+	},
+	
+	addEffect: function(name) {		
+		if (!this.effects[name]) {
+			var effect = Core.EffectFactory.create(name);
+			
+			if (effect) {
+				this.effects[effect.name] = effect;
+				effect.apply(this);
+		
+				if (Core.getGame().getPlayer() === this) {
+					Core.refresh();
+				}
+		
+				return true;
+			}
+		}
+		
+		return false;
+	},
+	
+	removeEffect: function(name) {
+		var effect = this.effects[name];
+		
+		if (effect) {
+			delete this.effects[name];
+			effect.remove(this);
+			
+			return true;
+		}
+		
+		return false;
 	},
 	
 	move: function(x, y) {
@@ -40,5 +73,14 @@ Object.assign(Core.Entity.prototype, {
 		}
 		
 		return false;
+	},
+	
+	endTurn: function() {
+		this.raiseEvent('endTurn');
+		
+		for (var key in this.effects) {
+			var effect = this.effects[key];
+			effect.endTurn(this);			
+		}
 	}
 });

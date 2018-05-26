@@ -11,11 +11,29 @@ Core.UI = {
 				this.valueTextElement.innerHTML = '%s / %s'.format(hp, maxHp);
 			}
 		};
+		
+		this._effectList = {
+			listElement: document.getElementById('effectList'),
+			
+			update: function(entity) {
+				this.listElement.innerHTML = '';
+				
+				for (var effectName in entity.effects) {
+					var effect = entity.effects[effectName];					
+					
+					var element = document.createElement('li');
+					element.innerHTML = '%s (%s)'.format(effect.name, effect.duration);
+					
+					this.listElement.append(element);
+				}
+			}
+		}
 	},
 	
 	update: function() {
 		var player = Core.getGame().getPlayer();
 		
 		this._hpBar.update(player.getHp(), player.getMaxHp());
+		this._effectList.update(player);
 	}
 };
