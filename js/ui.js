@@ -22,7 +22,7 @@ Core.UI = {
 					var effect = entity.effects[effectName];					
 					
 					var element = document.createElement('li');
-					element.innerHTML = '%s (%s)'.format(effect.name, effect.duration);
+					element.innerHTML = '%s (%s)'.format(effect.name, effect.duration ? effect.duration : '&#x221e;');
 					
 					this.listElement.append(element);
 				}
