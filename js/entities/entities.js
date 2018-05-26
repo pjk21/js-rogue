@@ -9,6 +9,7 @@ Core.EntityFactory.createPlayer = function() {
 		strength: 5,
 		toughness: 1,
 		sightRadius: 6,
+		restingHealRate: 2,
 		
 		body: {
 			head: new Core.Components.BodyPart({ name: 'head', equipped: 'leatherHelmet' }),
@@ -43,7 +44,8 @@ Core.EntityFactory.define('goblin', {
 	
 	tasks: [
 		Core.Tasks.rest,
-		Core.Tasks.wander
+		Core.Tasks.wander,
+		Core.Tasks.killPlayer
 	],
 	
 	components: [

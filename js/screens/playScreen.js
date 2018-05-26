@@ -126,6 +126,9 @@ Core.Screens.playScreen = {
 			else if (inputData.keyCode === ROT.VK_I) {
 				this.setSubScreen(Core.Screens.inventoryScreen.init());
 			}
+			else if (inputData.keyCode === ROT.VK_SPACE) {
+				didAct = player.rest();
+			}
 			
 			if (didAct) {
 				player.endTurn();

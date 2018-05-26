@@ -26,6 +26,13 @@ Core.Components.PlayerController = {
 		
 		Core.getGame().getEngine().lock();
 		this._acting = false;
+	},
+	
+	rest: function() {
+		this.heal(this.getRestingHealRate());
+		Core.MessageLog.add('You take a moment to rest.', 'info');
+		
+		return true;
 	}
 };
 
@@ -166,6 +173,29 @@ Core.Components.Sight = {
 	
 	init: function(properties) {
 		this._sightRadius = properties.sightRadius || 5;
+	},
+	
+	canSee: function(entity) {
+		if (!entity) {
+			return false;
+		}
+		
+		var dx2 = (entity.getX() - this.getX()) * (entity.getX() - this.getX());
+		var dy2 = (entity.getY() - this.getY()) * (entity.getY() - this.getY());
+		
+		if (dx2 + dy2 > this.getSightRadius() * this.getSightRadius()) {
+			return false;
+		}
+		
+		var found = false;
+		
+		this.getMap().getFov().compute(this.getX(), this.getY(), this.getSightRadius(), function(x, y, radius, visibility) {
+			if (x === entity.getX() && y === entity.getY()) {
+				found = true;
+			}
+		});
+		
+		return found;
 	}
 };
 
