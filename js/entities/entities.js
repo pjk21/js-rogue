@@ -31,7 +31,7 @@ Core.EntityFactory.createPlayer = function() {
 	});
 };
 
-Core.EntityFactory.define('goblin', {
+Core.EntityFactory.define('goblin', 100, {
 	name: 'goblin',
 	
 	glyph: 'g',

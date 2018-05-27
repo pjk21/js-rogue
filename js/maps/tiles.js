@@ -45,3 +45,15 @@ Core.Tiles.mossyWallTile = new Core.Tile({
 	walkable: false,
 	transparent: false
 });
+
+Core.Tiles.stairs = new Core.Tile({
+	name: 'Stairs',
+	description: 'A sets of stairs leading deeper into the dungeon.',
+	
+	glyph: '<',
+	colour: '#9BADB7',
+	backColour: '#663931',
+	
+	walkable: true,
+	transparent: true
+});

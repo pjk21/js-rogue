@@ -1,6 +1,6 @@
 Core.ItemFactory = new Core.Factory(Core.Item);
 
-Core.ItemFactory.define('potion', {
+Core.ItemFactory.define('potion', 100, {
 	name: 'potion',
 	
 	glyph: '!',
@@ -32,7 +32,7 @@ Core.ItemFactory.define('potion', {
 	]
 });
 
-Core.ItemFactory.define('antidote', {
+Core.ItemFactory.define('antidote', 25, {
 	name: 'antidote',
 	
 	glyph: '!',
@@ -61,7 +61,7 @@ Core.ItemFactory.define('antidote', {
 	]
 });
 
-Core.ItemFactory.define('leatherHelmet', {
+Core.ItemFactory.define('leatherHelmet', 8, {
 	name: 'leather helmet',
 	
 	glyph: '^',
@@ -74,7 +74,7 @@ Core.ItemFactory.define('leatherHelmet', {
 	]
 });
 
-Core.ItemFactory.define('ironHelmet', {
+Core.ItemFactory.define('ironHelmet', 5, {
 	name: 'iron helmet',
 	
 	glyph: '^',
@@ -87,7 +87,7 @@ Core.ItemFactory.define('ironHelmet', {
 	]
 });
 
-Core.ItemFactory.define('ironSword', {
+Core.ItemFactory.define('ironSword', 5, {
 	name: 'iron sword',
 	
 	glyph: '/',

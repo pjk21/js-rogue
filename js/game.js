@@ -32,6 +32,30 @@ Core.Game.prototype = {
 		Core.MessageLog.clear();
 		Core.MessageLog.show();
 		
+		this._currentLevel = 1;
+		this._generateMap();
+		
+		this._player = Core.EntityFactory.createPlayer();
+		this._player.setPosition(this.getMap().getRandomOpenCell());		
+		this.getMap().addEntity(this.getPlayer());		
+		
+		this._generateObjects(Core.EntityFactory.getSpawnTable(), Core.ItemFactory.getSpawnTable());
+	},
+	
+	descend: function() {
+		this._currentLevel++;
+		
+		this._generateMap();
+		
+		this.getPlayer().setPosition(this.getMap().getRandomOpenCell());
+		this.getMap().addEntity(this.getPlayer());
+		
+		this._generateObjects(Core.EntityFactory.getSpawnTable(), Core.ItemFactory.getSpawnTable());
+		
+		return true;
+	},
+	
+	_generateMap: function() {
 		this._map = new Core.Map({
 			width: Core.getWidth() * 2,
 			height: Core.getHeight() * 2,
@@ -55,6 +79,9 @@ Core.Game.prototype = {
 			},
 			
 			onPostGenerate: function(map, generator, generatorCallback) {
+				var stairsPosition = map.getRandomOpenCell();
+				map.setTile(stairsPosition.x, stairsPosition.y, Core.Tiles.stairs);
+				
 				var noise = new ROT.Noise.Simplex();
 				var wallCheck = function(x, y, tile) {
 					return tile === Core.Tiles.grassTile;
@@ -80,26 +107,20 @@ Core.Game.prototype = {
 				}					
 			}
 		});
-		
-		this._player = Core.EntityFactory.createPlayer();
-		this._player.setPosition(this.getMap().getRandomOpenCell());		
-		this.getMap().addEntity(this.getPlayer());
-		
+	},
+
+	_generateObjects: function(monsters, items) {		
 		for (var i = 0; i < 20; i++) {
-			var goblin = Core.EntityFactory.create("goblin");
-			goblin.setPosition(this.getMap().getRandomOpenCell());
-			this.getMap().addEntity(goblin);
+			var selectedMonster = ROT.RNG.getWeightedValue(monsters);		
+			var monster = Core.EntityFactory.create(selectedMonster);
+			monster.setPosition(this.getMap().getRandomOpenCell());
+			this.getMap().addEntity(monster);
 		}
 		
-		var helm = Core.ItemFactory.create('ironHelmet');
-		this.getMap().addItem(helm, this.getPlayer().getX(), this.getPlayer().getY());
-		
-		var itemOptions = [ 'potion', 'antidote' ];
-		
 		for (var i = 0; i < 50; i++) {
-			var item = Core.ItemFactory.create(itemOptions[i % itemOptions.length]);
-			var itemPosition = this.getMap().getRandomOpenCell();
-			
+			var selectedItem = ROT.RNG.getWeightedValue(items);
+			var item = Core.ItemFactory.create(selectedItem);
+			var itemPosition = this.getMap().getRandomOpenCell();			
 			this.getMap().addItem(item, itemPosition.x, itemPosition.y);
 		}
 	},

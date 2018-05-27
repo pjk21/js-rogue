@@ -129,6 +129,9 @@ Core.Screens.playScreen = {
 			else if (inputData.keyCode === ROT.VK_SPACE) {
 				didAct = player.rest();
 			}
+			else if (inputData.keyCode === ROT.VK_COMMA && inputData.shiftKey) {
+				didAct = Core.getGame().descend();
+			}
 			
 			if (didAct) {
 				player.endTurn();

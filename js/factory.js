@@ -1,11 +1,18 @@
 Core.Factory = function(ctor) {
 	this._templates = [];
 	this._ctor = ctor;
+	
+	this._spawnTable = {};
 };
 
 Core.Factory.prototype = {
-	define: function(name, template) {
+	getSpawnTable: function() {
+		return this._spawnTable;
+	},
+	
+	define: function(name, weight, template) {
 		this._templates[name] = template;
+		this._spawnTable[name] = weight;
 	},
 	
 	create: function(name) {

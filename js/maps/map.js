@@ -6,6 +6,10 @@ Core.Map = function(properties) {
 	
 	this._tiles = [];
 	this._explored = [];
+	
+	this._entities = {};
+	this._items = {};
+	
 	this._generate(properties);
 	
 	var map = this;
@@ -13,9 +17,6 @@ Core.Map = function(properties) {
 	this._fov = new ROT.FOV.DiscreteShadowcasting(function(x, y) {
 		return map.getTile(x, y).isTransparent();
 	}, { topology: 4 });
-	
-	this._entities = {};
-	this._items = {};
 };
 
 Core.Map.prototype = {
