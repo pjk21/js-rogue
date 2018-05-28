@@ -49,6 +49,7 @@ var Core = {
 		
 		bindEventToScreen('keydown');
 		bindEventToScreen('keypress');
+		bindEventToScreen('click');
 		
 		this.MessageLog.init();
 		this.UI.init();

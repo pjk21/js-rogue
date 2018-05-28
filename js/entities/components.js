@@ -6,6 +6,14 @@ Core.Components.PlayerController = {
 		return this._speed;
 	},
 	
+	getPath: function() {
+		return this._path;
+	},
+	
+	setPath: function(path) {
+		this._path = path;
+	},
+	
 	listeners: {
 		onDeath: function(attacker) {
 			Core.getGame().end();
@@ -13,7 +21,8 @@ Core.Components.PlayerController = {
 	},
 	
 	init: function(properties) {
-		this._speed = properties.speed || 100;
+		this._speed = properties.speed || 100;		
+		this._path = null;
 	},
 	
 	act: function() {
@@ -25,6 +34,27 @@ Core.Components.PlayerController = {
 		Core.refresh();		
 		
 		Core.getGame().getEngine().lock();
+		
+		if (this.getPath()) {
+			var didAct = false;
+			var player = this;
+			
+			var next = this.getPath().shift();
+			
+			if (next) {
+				didAct = player.move(next.x - player.getX(), next.y - player.getY());
+			}
+			
+			if (didAct) {
+				player.endTurn();
+				setTimeout(function() { Core.getGame().getEngine().unlock(); }, 33);
+			}		
+			else {
+				// Failed to follow path. Get rid of it.
+				this.setPath(null);
+			}
+		}
+		
 		this._acting = false;
 	},
 	

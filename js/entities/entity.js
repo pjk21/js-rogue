@@ -54,6 +54,10 @@ Object.assign(Core.Entity.prototype, {
 		var map = this.getMap();
 		var target = map.getEntityAt(this.getX() + x, this.getY() + y);
 		
+		if (x === 0 && y === 0) {
+			return false;
+		}
+		
 		if (target) {
 			if (target.hasComponent(Core.Components.Combat) && (this.hasComponent(Core.Components.PlayerController) || target.hasComponent(Core.Components.PlayerController))) {
 				this.attack(target);
