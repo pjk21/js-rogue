@@ -118,10 +118,10 @@ Core.Components.Health = {
 		Core.MessageLog.add(String.format('%s hits %s for %s HP.', attacker.getName(), this.getName(), damage), 'combat');
 		
 		if (this._hp <= 0) {
+			Core.MessageLog.add(String.format('%s has died.', this.getName()), 'combat');
+			
 			this.raiseEvent('onDeath', attacker);
 			attacker.raiseEvent('onKill', this);
-			
-			Core.MessageLog.add(String.format('%s has died.', this.getName()), 'combat');
 		}
 	},
 	
