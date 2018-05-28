@@ -24,6 +24,7 @@ Core.EntityFactory.createPlayer = function() {
 			Core.Components.PlayerController,
 			Core.Components.Health,
 			Core.Components.Combat,
+			Core.Components.ExperienceGainer,
 			Core.Components.Sight,
 			Core.Components.Inventory,
 			Core.Components.Body
@@ -41,6 +42,7 @@ Core.EntityFactory.define('goblin', 100, {
 	strength: 4,
 	toughness: 0,
 	sightRadius: 3,
+	xp: 5,
 	
 	tasks: [
 		Core.Tasks.rest,
@@ -52,6 +54,7 @@ Core.EntityFactory.define('goblin', 100, {
 		Core.Components.AiController,
 		Core.Components.Health,
 		Core.Components.Combat,
+		Core.Components.ExperienceGiver,
 		Core.Components.Sight
 	]
 });

@@ -126,7 +126,12 @@ Core.Components.Health = {
 	},
 	
 	heal: function(amount) {
-		this._hp = Math.min(this._hp + amount, this._maxHp);
+		if (amount) {
+			this._hp = Math.min(this._hp + amount, this._maxHp);
+		}
+		else {
+			this._hp = this._maxHp;
+		}
 	}
 };
 
@@ -384,5 +389,67 @@ Core.Components.Body = {
 		}
 		
 		return false;
+	}
+};
+
+Core.Components.ExperienceGiver = {
+	getXp: function() {
+		return this._xp;
+	},
+	
+	init: function(properties) {
+		this._xp = properties.xp || 0;
+	}
+};
+
+Core.Components.ExperienceGainer = {
+	getXp: function() {
+		return this._xp;
+	},
+	
+	getXpForNextLevel: function() {
+		return 25 + ((this._currentLevel - 1) * Math.pow(25, 1.02));
+	},
+	
+	listeners: {
+		onKill: function(target) {		
+			if (target.hasComponent(Core.Components.ExperienceGiver)) {
+				this.addExperience(target.getXp());
+				Core.UI.update();
+			}
+		}
+	},
+	
+	init: function(properties) {
+		this._currentLevel = 1;
+		this._xp = 0;
+	},
+	
+	addExperience: function(xp) {	
+		var levelsGained = 0;
+	
+		while (xp > 0) {
+			if (this._xp + xp >= this.getXpForNextLevel()) {
+				var used = this.getXpForNextLevel() - this._xp;
+				xp -= used;
+				this._xp = 0;
+				this._currentLevel++;
+				levelsGained++;
+				
+				this._maxHp += 5;
+				this._strength++;
+				this._toughness++;
+				
+				this.heal();
+			}
+			else {
+				this._xp += xp;
+				xp = 0;
+			}
+		}
+
+		if (levelsGained > 0) {
+			Core.MessageLog.add('You advance to level %s!'.format(this._currentLevel), 'info');
+		}
 	}
 };

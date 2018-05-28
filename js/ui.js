@@ -12,6 +12,18 @@ Core.UI = {
 			}
 		};
 		
+		this._xpBar = {
+			valueElement: document.getElementById('xpBarValue'),
+			valueTextElement: document.getElementById('xpBarText'),
+			
+			update: function(xp, xpForNextLevel) {
+				var xpPercent = (xp / xpForNextLevel) * 100;
+				
+				this.valueElement.setAttribute('style', 'width: %s%;'.format(xpPercent));
+				this.valueTextElement.innerHTML = '%s%'.format(xpPercent.toFixed(1));
+			}
+		};
+		
 		this._effectList = {
 			listElement: document.getElementById('effectList'),
 			
@@ -34,6 +46,7 @@ Core.UI = {
 		var player = Core.getGame().getPlayer();
 		
 		this._hpBar.update(player.getHp(), player.getMaxHp());
+		this._xpBar.update(player.getXp(), player.getXpForNextLevel());
 		this._effectList.update(player);
 	}
 };
