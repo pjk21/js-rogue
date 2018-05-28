@@ -38,7 +38,14 @@ Core.MessageLog = {
 		this._messages = [];
 	},
 
-	toggle: function() {
+	toggle: function(element) {
 		this._messagesElement.classList.toggle('collapsed');
+		
+		if (this._messagesElement.classList.contains('collapsed')) {
+			element.innerHTML = '+';
+		}
+		else {
+			element.innerHTML = '-';
+		}
 	}
 };
