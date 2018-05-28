@@ -40,13 +40,5 @@ Core.MessageLog = {
 
 	toggle: function() {
 		this._messagesElement.classList.toggle('collapsed');
-	},
-	
-	show: function() {
-		document.getElementById('messageLog').setAttribute('class', '');
-	},
-	
-	hide: function() {
-		document.getElementById('messageLog').setAttribute('class', 'collapsed');
 	}
 };

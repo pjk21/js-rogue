@@ -30,7 +30,7 @@ Core.Game.prototype = {
 		this._ended = false;
 		
 		Core.MessageLog.clear();
-		Core.MessageLog.show();
+		Core.UI.show();
 		
 		this._currentLevel = 1;
 		this._generateMap();

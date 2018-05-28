@@ -19,7 +19,8 @@ Core.Screens.mainMenuScreen = {
 	
 	enter: function() {
 		this._menuIndex = 0;
-		Core.MessageLog.hide();
+		
+		Core.UI.hide();
 	},
 	
 	render: function(display) {

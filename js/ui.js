@@ -42,6 +42,16 @@ Core.UI = {
 		}
 	},
 	
+	show: function() {
+		document.getElementById('messageLog').setAttribute('class', '');
+		document.getElementById('statsPanel').setAttribute('class', '');
+	},
+	
+	hide: function() {
+		document.getElementById('messageLog').setAttribute('class', 'collapsed');
+		document.getElementById('statsPanel').setAttribute('class', 'collapsed');
+	},
+	
 	update: function() {
 		var player = Core.getGame().getPlayer();
 		
